@@ -14,8 +14,8 @@ public class JavaToLinux {
             StringBuffer sb = new StringBuffer();
 
             String fileName = " LinuxChannel.iml";
-            String line ;
-            while ((line = br.readLine())!= null) {
+            String line;
+            while ((line = br.readLine()) != null) {
                 sb.append(line).append("\n");
             }
             System.out.println(sb.toString());
