@@ -24,6 +24,10 @@ public class JavaToLinux {
 
         String path = "/Users/kingwufeng/workspace/LinuxChannel/data/";
         File[] files = new File(path).listFiles();
+        if(files == null || files.length == 0) {
+            System.out.println("The directory is empty!");
+            return;
+        }
         for (File file : files) {
             String fileName = file.getName();
             if(file.isFile() && fileName.contains(".txt")) {
@@ -46,23 +50,26 @@ public class JavaToLinux {
 
     private static String commandExec(String[] cmds) {
         Process process = null;
-        StringBuffer sb = null;
+        BufferedReader br = null;
         try {
             process = Runtime.getRuntime().exec(cmds);
-            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            sb = new StringBuffer();
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line).append("\n");
-            }
-
-        } catch(IOException e){
-            e.printStackTrace();
+            br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        } catch(IOException e1){
+            System.out.println("The excution of command is failed!");
         } finally {
             if (process != null) {
                 process.destroy();
             }
+        }
+
+        StringBuffer sb = new StringBuffer();
+        String line;
+        try {
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+        } catch (IOException e2) {
+            System.out.println("Data inputing is failed!");
         }
 
         return sb.toString();
