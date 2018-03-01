@@ -22,7 +22,7 @@ public class JavaToLinux {
         System.out.println("请输入wc命令的具体执行方式(格式如\"-c\")");
         String wcDetail = sc.nextLine();
 
-        String path = "/Users/kingwufeng/workspace/LinuxChannel/data/";
+        String path = "./data/";
         File[] files = new File(path).listFiles();
         if(files == null || files.length == 0) {
             System.out.println("The directory is empty!");
